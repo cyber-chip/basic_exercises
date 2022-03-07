@@ -5,6 +5,8 @@
 # Маша: 2
 # Петя: 2
 
+from itertools import count
+
 students = [
     {'first_name': 'Вася'},
     {'first_name': 'Петя'},
@@ -12,7 +14,17 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
+count = {}
+for student in students:
+    for name in student.values():
+    # print(name)
+        if name in count:
+            count[name] += 1
+        else:
+            count[name] = 1  
+
+for n in count:
+    print(n, count[n])            
 
 
 # Задание 2
@@ -26,7 +38,20 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+
+def list(students):
+    counts = {}
+    for student in students:
+      for name in student.values():
+        if name in counts:
+          counts[name] += 1
+        else:
+          counts[name] = 1    
+
+    result=sorted(counts.items(), key = lambda item : item[1])
+    answer=(result.pop())
+    return(answer[0])
+print(f'Самое частое имя среди учеников: {list(students)}')
 
 
 # Задание 3
@@ -51,7 +76,20 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+i=1
+for st in school_students:
+    counts = {}    
+    for student in st:
+      for name in student.values():
+        if name in counts:
+          counts[name] += 1
+        else:
+          counts[name] = 1    
+
+    result=sorted(counts.items(), key = lambda item : item[1])
+    answer=(result.pop())
+    print(f'самое встречающееся имя в классе {i} {answer[0]}')
+    i+=1
 
 
 # Задание 4
@@ -72,7 +110,21 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+males = 0
+females = 0
+
+for clas in school:
+    number_of_clas = clas['class']
+    for students in clas['students']:
+        # print(students)
+        for f_cl in students.values():
+            # print(f_cl)       
+            if is_male[f_cl]:
+                males += 1
+            else:
+                females += 1           
+    print(f'в классе {number_of_clas} {females} девочки и {males} мальчика')
+    males,females = (0,0)
 
 
 # Задание 5
@@ -91,5 +143,22 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
+males = 0
+females = 0
+
+for clas in school:
+    number_of_clas = clas['class']
+    for students in clas['students']:
+        # print(students)
+        for f_cl in students.values():
+            # print(f_cl)       
+            if is_male[f_cl]:
+                males += 1
+            else:
+                females += 1        
+    if males > females:
+        print(f'Больше всего мальчиков в классе {number_of_clas}')
+    else:
+        print(f'Больше всего девочек в классе {number_of_clas}')
+    males,females = (0,0)
 
